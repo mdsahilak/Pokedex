@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA997DF42C334CA2007C2E51 /* PokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA997DF32C334CA2007C2E51 /* PokedexApp.swift */; };
-		BA997DF62C334CA2007C2E51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA997DF52C334CA2007C2E51 /* ContentView.swift */; };
+		BA997DF62C334CA2007C2E51 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA997DF52C334CA2007C2E51 /* HomeView.swift */; };
 		BA997DF82C334CA3007C2E51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA997DF72C334CA3007C2E51 /* Assets.xcassets */; };
 		BA997DFB2C334CA3007C2E51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA997DFA2C334CA3007C2E51 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		BA997DF02C334CA2007C2E51 /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA997DF32C334CA2007C2E51 /* PokedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexApp.swift; sourceTree = "<group>"; };
-		BA997DF52C334CA2007C2E51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BA997DF52C334CA2007C2E51 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BA997DF72C334CA3007C2E51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA997DFA2C334CA3007C2E51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				BA997DF32C334CA2007C2E51 /* PokedexApp.swift */,
-				BA997DF52C334CA2007C2E51 /* ContentView.swift */,
+				BA997DF52C334CA2007C2E51 /* HomeView.swift */,
 				BA997DF72C334CA3007C2E51 /* Assets.xcassets */,
 				BA997DF92C334CA3007C2E51 /* Preview Content */,
 			);
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA997DF62C334CA2007C2E51 /* ContentView.swift in Sources */,
+				BA997DF62C334CA2007C2E51 /* HomeView.swift in Sources */,
 				BA997DF42C334CA2007C2E51 /* PokedexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
