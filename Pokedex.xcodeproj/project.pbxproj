@@ -19,6 +19,7 @@
 		BA997DF52C334CA2007C2E51 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BA997DF72C334CA3007C2E51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA997DFA2C334CA3007C2E51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BA997E052C334E01007C2E51 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +36,7 @@
 		BA997DE72C334CA2007C2E51 = {
 			isa = PBXGroup;
 			children = (
+				BA997E052C334E01007C2E51 /* README.md */,
 				BA997DF22C334CA2007C2E51 /* Pokedex */,
 				BA997DF12C334CA2007C2E51 /* Products */,
 			);
