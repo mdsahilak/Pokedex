@@ -17,6 +17,14 @@ struct HomeView: View {
             Text("Hello, world!")
         }
         .padding()
+        .task {
+            do {
+                let pokemons = try await PokemonService.fetchPokemons()
+                print(pokemons)
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
