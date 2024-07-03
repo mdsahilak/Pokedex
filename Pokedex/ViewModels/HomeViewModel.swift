@@ -5,25 +5,38 @@
 //  Created by Sahil Ak on 02/07/2024.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class HomeViewModel: ObservableObject {
     @Published var pokemons: [PokemonLink]? = nil
-    @Published var selectedPokemon: PokemonLink? = nil
+    
+    @Published var showPaginationLoader: Bool = false
+    @Published var nextPagePath: String? = nil
     
     public func loadPokemons() async {
         do {
-            pokemons = try await PokemonService.fetchPokemons()
+            let data = try await PokemonService.fetchPokemons()
+            
+            pokemons = data.results
+            nextPagePath = data.next
         } catch {
             print(error)
         }
     }
     
-    public func loadPokemonInformation(for url: String) async {
+    public func loadNextPageofPokemons() async {
         do {
-            let info = try await PokemonService.fetchPokemonInformation(for: url)
-            print(info)
+            guard let nextPage = nextPagePath else { return }
+            
+            withAnimation { showPaginationLoader = true }
+            
+            let data = try await PokemonService.fetchPokemons(url: URL(string: nextPage))
+            
+            pokemons?.append(contentsOf: data.results)
+            nextPagePath = data.next
+            
+            withAnimation { showPaginationLoader = false }
         } catch {
             print(error)
         }

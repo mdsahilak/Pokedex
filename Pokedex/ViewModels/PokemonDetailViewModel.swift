@@ -5,7 +5,7 @@
 //  Created by Sahil Ak on 03/07/2024.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class PokemonDetailViewModel: ObservableObject {
@@ -21,7 +21,7 @@ final class PokemonDetailViewModel: ObservableObject {
     
     public func loadPokemonInformation() async {
         do {
-            pokemonInfo = try await PokemonService.fetchPokemonInformation(for: pokemonLink.url)
+            pokemonInfo = try await PokemonService.fetchPokemonInformation(for: URL(string: pokemonLink.url))
         } catch {
             print(error)
         }

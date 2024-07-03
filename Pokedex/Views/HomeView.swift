@@ -11,10 +11,10 @@ struct HomeView: View {
     @StateObject var vm: HomeViewModel = HomeViewModel()
     
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             VStack {
                 if let pokemons = vm.pokemons {
-                    List(pokemons, selection: $vm.selectedPokemon) { pokemon in
+                    List(pokemons) { pokemon in
                         NavigationLink(value: pokemon) {
                             pokemonRow(for: pokemon)
                         }
@@ -25,12 +25,9 @@ struct HomeView: View {
                         .padding()
                 }
             }
-        } detail: {
-            if let selectedPokemon = vm.selectedPokemon {
-                PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: selectedPokemon))
-                    .id(vm.selectedPokemon)
-            } else {
-                Text("Please select a pokemon.")
+            .navigationTitle("Pokedex")
+            .navigationDestination(for: PokemonLink.self) { pokemonLink in
+                PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: pokemonLink))
             }
         }
         .task {
@@ -39,12 +36,17 @@ struct HomeView: View {
     }
     
     private func pokemonRow(for pokemon: PokemonLink) -> some View {
-        Section {
-            HStack {
-                PokemonImageView(url: pokemon.imageURL)
-                    .frame(width: 100, height: 100, alignment: .center)
-                
-                Text(pokemon.name)
+        HStack {
+            PokemonImageView(url: pokemon.imageURL)
+                .frame(width: 100, height: 100, alignment: .center)
+            
+            Text(pokemon.name)
+        }
+        .task {
+            if let lastPokemon = vm.pokemons?.last {
+                if pokemon.id == lastPokemon.id {
+                    await vm.loadNextPageofPokemons()
+                }
             }
         }
     }
