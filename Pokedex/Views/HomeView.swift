@@ -13,7 +13,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if let pokemons = vm.pokemons {
+                if let pokemons = vm.searchedPokemons {
                     List(pokemons) { pokemon in
                         NavigationLink(value: pokemon) {
                             pokemonRow(for: pokemon)
@@ -30,6 +30,7 @@ struct HomeView: View {
                 PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: pokemonLink))
             }
         }
+        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, prompt: "Search Pokemons")
         .task {
             await vm.loadPokemons()
         }
@@ -43,6 +44,8 @@ struct HomeView: View {
             Text(pokemon.name)
         }
         .task {
+            guard !vm.isSearching else { return }
+            
             if let lastPokemon = vm.pokemons?.last {
                 if pokemon.id == lastPokemon.id {
                     await vm.loadNextPageofPokemons()

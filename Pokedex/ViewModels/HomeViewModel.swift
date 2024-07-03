@@ -11,8 +11,22 @@ import SwiftUI
 final class HomeViewModel: ObservableObject {
     @Published var pokemons: [PokemonLink]? = nil
     
+    @Published var isSearching: Bool = false
+    @Published var searchText: String = ""
+    
     @Published var showPaginationLoader: Bool = false
     @Published var nextPagePath: String? = nil
+    
+    public var searchedPokemons: [PokemonLink]? {
+        guard let pokemons else { return nil }
+        
+        if searchText.isEmpty {
+            return pokemons
+        } else {
+            let filteredPokemons = pokemons.filter { $0.name.contains(searchText.lowercased()) }
+            return filteredPokemons
+        }
+    }
     
     public func loadPokemons() async {
         do {
