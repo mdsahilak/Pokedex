@@ -29,6 +29,7 @@ struct HomeView: View {
         }
         .task {
             await vm.loadPokemons()
+            await vm.loadPokemonInformation(for: "https://pokeapi.co/api/v2/pokemon/7")
         }
     }
     

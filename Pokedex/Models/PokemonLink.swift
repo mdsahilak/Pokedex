@@ -16,13 +16,14 @@ struct PokemonAPIResponse: Codable {
 }
 
 struct PokemonLink: Codable, Identifiable {
-    var id: String { name }
+    static let mock: PokemonLink = .init(name: "squirtle", url: "https://pokeapi.co/api/v2/pokemon/7/")
+    
+    var id: Int { Int((url as NSString).lastPathComponent) ?? 0 }
     
     var name: String
     var url: String
     
     var imageURL: URL? {
-        let id = (url as NSString).lastPathComponent
         return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
     }
 }

@@ -19,12 +19,18 @@ final class PokemonService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         let decodedData = try decoder.decode(PokemonAPIResponse.self, from: data)
-        print("API response: \(decodedData)")
         
         return decodedData.results
     }
     
-    public static func fetchPokemonInformation(for name: String) async throws {
+    public static func fetchPokemonInformation(for url: String) async throws -> PokemonInformation {
+        let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
         
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let info = try decoder.decode(PokemonInformation.self, from: data)
+        
+        return info
     }
 }
