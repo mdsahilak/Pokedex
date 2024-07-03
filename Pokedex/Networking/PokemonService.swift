@@ -16,6 +16,8 @@ final class PokemonService {
         let config = URLSessionConfiguration.default
         
         config.waitsForConnectivity = true
+        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForResource = 30
         
         return URLSession(configuration: config)
     }()
