@@ -15,7 +15,14 @@ struct PokemonAPIResponse: Codable {
     var results: [PokemonLink]
 }
 
-struct PokemonLink: Codable {
+struct PokemonLink: Codable, Identifiable {
+    var id: String { name }
+    
     var name: String
     var url: String
+    
+    var imageURL: URL? {
+        let id = (url as NSString).lastPathComponent
+        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
+    }
 }

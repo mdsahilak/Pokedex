@@ -23,4 +23,8 @@ final class PokemonService {
         
         return decodedData.results
     }
+    
+    public static func fetchPokemonInformation(for name: String) async throws {
+        
+    }
 }

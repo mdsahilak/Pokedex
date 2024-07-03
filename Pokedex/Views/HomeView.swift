@@ -8,21 +8,37 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var vm: HomeViewModel = HomeViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                if let pokemons = vm.pokemons {
+                    List {
+                        ForEach(pokemons) { pokemon in
+                            pokemonRow(for: pokemon)
+                        }
+                    }
+                    .listStyle(.plain)
+                } else {
+                    ProgressView()
+                        .padding()
+                }
+            }
+            .navigationTitle("Pokedex")
         }
-        .padding()
         .task {
-            do {
-                let pokemons = try await PokemonService.fetchPokemons()
-                print(pokemons)
-            } catch {
-                print(error)
+            await vm.loadPokemons()
+        }
+    }
+    
+    private func pokemonRow(for pokemon: PokemonLink) -> some View {
+        Section {
+            HStack {
+                PokemonImageView(url: pokemon.imageURL)
+                    .frame(width: 100, height: 100, alignment: .center)
+                
+                Text(pokemon.name)
             }
         }
     }
