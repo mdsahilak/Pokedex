@@ -13,7 +13,17 @@ final class PokemonDetailViewModel: ObservableObject {
     
     let pokemonLink: PokemonLink
     
+    @Published var pokemonInfo: PokemonInformation? = nil
+    
     init(pokemonLink: PokemonLink) {
         self.pokemonLink = pokemonLink
+    }
+    
+    public func loadPokemonInformation() async {
+        do {
+            pokemonInfo = try await PokemonService.fetchPokemonInformation(for: pokemonLink.url)
+        } catch {
+            print(error)
+        }
     }
 }

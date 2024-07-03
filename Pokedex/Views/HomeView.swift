@@ -11,11 +11,11 @@ struct HomeView: View {
     @StateObject var vm: HomeViewModel = HomeViewModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationSplitView {
             VStack {
                 if let pokemons = vm.pokemons {
-                    List {
-                        ForEach(pokemons) { pokemon in
+                    List(pokemons, selection: $vm.selectedPokemon) { pokemon in
+                        NavigationLink(value: pokemon) {
                             pokemonRow(for: pokemon)
                         }
                     }
@@ -25,11 +25,16 @@ struct HomeView: View {
                         .padding()
                 }
             }
-            .navigationTitle("Pokedex")
+        } detail: {
+            if let selectedPokemon = vm.selectedPokemon {
+                PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: selectedPokemon))
+                    .id(vm.selectedPokemon)
+            } else {
+                Text("Please select a pokemon.")
+            }
         }
         .task {
             await vm.loadPokemons()
-            await vm.loadPokemonInformation(for: "https://pokeapi.co/api/v2/pokemon/7")
         }
     }
     

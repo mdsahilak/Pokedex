@@ -11,7 +11,25 @@ struct PokemonDetailView: View {
     @ObservedObject var vm: PokemonDetailViewModel
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(.vertical) {
+            VStack {
+                if let pokemon = vm.pokemonInfo {
+                    PokemonImageView(url: pokemon.imageURL)
+                        .frame(maxHeight: 350)
+                        .padding()
+                    
+                    Text(pokemon.name)
+                        .font(.title)
+                } else {
+                    SpacingLoaderView()
+                        .padding(.top, 190)
+                }
+            }
+            .padding()
+            .task {
+                await vm.loadPokemonInformation()
+            }
+        }
     }
 }
 

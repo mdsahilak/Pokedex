@@ -9,7 +9,26 @@ import SwiftUI
 
 struct SpacingLoaderView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            
+            HStack {
+                Spacer()
+                
+                ProgressView()
+                    .padding(7.7)
+                    .background(
+                        Circle()
+                            .foregroundColor(.gray)
+                            .opacity(0.1)
+                    )
+                    .padding()
+                
+                Spacer()
+            }
+            
+            Spacer()
+        }
     }
 }
 
