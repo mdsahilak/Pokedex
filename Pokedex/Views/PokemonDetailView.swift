@@ -14,9 +14,17 @@ struct PokemonDetailView: View {
         ScrollView(.vertical) {
             VStack {
                 if let pokemon = vm.pokemonInfo {
-                    PokemonImageView(url: pokemon.imageURL)
+                    PokemonImageView(url: pokemon.homeSpriteURL)
                         .frame(maxHeight: 350)
-                        .padding()
+                        .padding(.horizontal)
+                    
+                    PokemonImageView(url: pokemon.officialSpriteURL)
+                        .frame(maxHeight: 350)
+                        .padding(.horizontal)
+                    
+                    PokemonImageView(url: pokemon.shinySpriteURL)
+                        .frame(maxHeight: 350)
+                        .padding(.horizontal)
                     
                     Text(pokemon.name)
                         .font(.title)

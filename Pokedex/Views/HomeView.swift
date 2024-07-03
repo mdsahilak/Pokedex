@@ -41,7 +41,8 @@ struct HomeView: View {
             PokemonImageView(url: pokemon.imageURL)
                 .frame(width: 100, height: 100, alignment: .center)
             
-            Text(pokemon.name)
+            Text(pokemon.name.capitalized)
+                .font(.title3)
         }
         .task {
             guard !vm.isSearching else { return }
