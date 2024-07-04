@@ -18,13 +18,12 @@ struct PokemonImageView: View {
                 image
                     .resizable()
                     .aspectRatio(1, contentMode: contentMode)
+                
             } else if state.error != nil {
                 Image(systemName: "exclamationmark.circle")
                     .aspectRatio(1, contentMode: .fit)
             } else {
-                ProgressView()
-                    .frame(width: 33, height: 33)
-                    .padding()
+                SpacingLoaderView()
             }
         }
     }

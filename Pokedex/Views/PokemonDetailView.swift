@@ -8,41 +8,34 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @Namespace private var heroAnimation
     @ObservedObject var vm: PokemonDetailViewModel
     
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 if let pokemon = vm.pokemonInfo {
-                    PokemonImageView(url: pokemon.homeSpriteURL)
-                        .frame(maxHeight: 350)
-                        .padding(.horizontal)
-                    
                     PokemonImageView(url: pokemon.officialSpriteURL)
+                        .padding()
                         .frame(maxHeight: 350)
-                        .padding(.horizontal)
+                        .background {
+                            RoundedRectangle(cornerRadius: 13)
+                                .foregroundStyle(.gray.gradient.opacity(0.3))
+                        }
                     
-                    PokemonImageView(url: pokemon.shinySpriteURL)
-                        .frame(maxHeight: 350)
-                        .padding(.horizontal)
-                    
-                    Text(pokemon.name)
-                        .font(.title)
-                    
-                    Text("Height: \(pokemon.height)")
-                    Text("Weight: \(pokemon.weight)")
+                    Divider()
+                    Text("Height: \(pokemon.height) | Weight: \(pokemon.weight)")
+                    Divider()
                     
                     ForEach(pokemon.statInfos) { statInfo in
                         ProgressView(value: statInfo.baseStat, total: 255.0) {
-                            Text(statInfo.statLink.name)
-                        } currentValueLabel: {
                             HStack {
-                                Text("\(statInfo.baseStat, specifier: "%.0f")")
+                                Text(statInfo.statLink.name.capitalized)
                                 Spacer()
-                                Text("255")
+                                Text("\(statInfo.baseStat, specifier: "%.0f")")
                             }
                         }
-                        
+                        .padding(7)
                     }
                 } else {
                     SpacingLoaderView()
@@ -55,6 +48,9 @@ struct PokemonDetailView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("\(vm.pokemonLink.name.capitalized)")
+        
     }
 }
 

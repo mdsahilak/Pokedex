@@ -5,7 +5,7 @@
 //  Created by Sahil Ak on 03/07/2024.
 //
 
-import Foundation
+import SwiftUI
 
 struct PokemonInformation: Codable, Identifiable {
     var height: Int
@@ -16,6 +16,9 @@ struct PokemonInformation: Codable, Identifiable {
     var statInfos: [StatInfo]
     
     var weight: Int
+    
+    var statsSum: Double { statInfos.reduce(0) { $0 + $1.baseStat } }
+    var statsTotal: Double { 255.0 * Double(statInfos.count) }
     
     var homeSpriteURL: URL? {
         return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(id).png")

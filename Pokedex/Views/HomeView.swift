@@ -25,6 +25,7 @@ struct HomeView: View {
                         .padding()
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Pokedex")
             .navigationDestination(for: PokemonLink.self) { pokemonLink in
                 PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: pokemonLink))
