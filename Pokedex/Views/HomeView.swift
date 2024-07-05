@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @StateObject var vm: HomeViewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
             VStack {
                 if let pokemons = vm.searchedPokemons {
-                    List(pokemons) { pokemon in
-                        NavigationLink(value: pokemon) {
-                            pokemonRow(for: pokemon)
+                    ScrollView {
+                        LazyVGrid(columns: columnsForDevice()) {
+                            ForEach(pokemons) { pokemon in
+                                Button {
+                                    vm.selectedPokemon = pokemon
+                                } label: {
+                                    pokemonRow(for: pokemon)
+                                }
+                                .padding(7)
+                            }
                         }
+                        .animation(.easeInOut, value: vm.searchedPokemons)
+                        .padding()
                     }
-                    .listStyle(.plain)
                 } else {
                     ProgressView()
                         .padding()
@@ -27,11 +36,11 @@ struct HomeView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Pokedex")
-            .navigationDestination(for: PokemonLink.self) { pokemonLink in
-                PokemonDetailView(vm: PokemonDetailViewModel(pokemonLink: pokemonLink))
+            .sheet(item: $vm.selectedPokemon) { selectedPokemon in
+                PokemonDetailView(vm: .init(pokemonLink: selectedPokemon))
             }
         }
-        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, prompt: "Search Pokemons")
+        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: "Search Pokemons")
         .task {
             await vm.loadPokemons()
         }
@@ -39,11 +48,22 @@ struct HomeView: View {
     
     private func pokemonRow(for pokemon: PokemonLink) -> some View {
         HStack {
-            PokemonImageView(url: pokemon.imageURL)
-                .frame(width: 100, height: 100, alignment: .center)
+            Spacer()
             
-            Text(pokemon.name.capitalized)
-                .font(.title3)
+            VStack {
+                PokemonImageView(url: pokemon.imageURL)
+                    .frame(width: 100, height: 100, alignment: .center)
+                
+                Text(pokemon.name.capitalized)
+                    .font(.title3)
+            }
+            
+            Spacer()
+        }
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 13)
+                .foregroundStyle(.gray.gradient.opacity(0.3))
         }
         .task {
             guard !vm.isSearching else { return }
@@ -55,6 +75,25 @@ struct HomeView: View {
             }
         }
     }
+    
+    private func columnsForDevice() -> [GridItem] {
+        if horizontalSizeClass == .regular {
+            return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+        } else {
+            return [GridItem(.flexible())]
+        }
+    }
+}
+
+
+struct Device {
+    // MARK: - Static Properties
+
+    /// The device is an iPad.
+    static let iPad = UIDevice.current.userInterfaceIdiom == .pad
+    
+    static let iPhoneSEor8 = UIDevice.current.userInterfaceIdiom == .phone && max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) <= 667.0
+    
 }
 
 #Preview {

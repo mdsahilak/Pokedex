@@ -8,49 +8,60 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    @Namespace private var heroAnimation
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: PokemonDetailViewModel
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                if let pokemon = vm.pokemonInfo {
-                    PokemonImageView(url: pokemon.officialSpriteURL)
-                        .padding()
-                        .frame(maxHeight: 350)
-                        .background {
-                            RoundedRectangle(cornerRadius: 13)
-                                .foregroundStyle(.gray.gradient.opacity(0.3))
-                        }
-                    
-                    Divider()
-                    Text("Height: \(pokemon.height) | Weight: \(pokemon.weight)")
-                    Divider()
-                    
-                    ForEach(pokemon.statInfos) { statInfo in
-                        ProgressView(value: statInfo.baseStat, total: 255.0) {
-                            HStack {
-                                Text(statInfo.statLink.name.capitalized)
-                                Spacer()
-                                Text("\(statInfo.baseStat, specifier: "%.0f")")
+        NavigationStack {
+            ScrollView(.vertical) {
+                VStack {
+                    if let pokemon = vm.pokemonInfo {
+                        PokemonImageView(url: pokemon.officialSpriteURL)
+                            .padding()
+                            .frame(maxHeight: 350)
+                            .background {
+                                RoundedRectangle(cornerRadius: 13)
+                                    .foregroundStyle(.gray.gradient.opacity(0.3))
                             }
+                        
+                        Divider()
+                        Text("Height: \(pokemon.height) | Weight: \(pokemon.weight)")
+                        Divider()
+                        
+                        ForEach(pokemon.statInfos) { statInfo in
+                            ProgressView(value: statInfo.baseStat, total: 255.0) {
+                                HStack {
+                                    Text(statInfo.statLink.name.capitalized)
+                                    Spacer()
+                                    Text("\(statInfo.baseStat, specifier: "%.0f")")
+                                }
+                            }
+                            .padding(7)
                         }
-                        .padding(7)
+                    } else {
+                        SpacingLoaderView()
+                            .padding(.top, 190)
                     }
-                } else {
-                    SpacingLoaderView()
-                        .padding(.top, 190)
+                }
+                .padding()
+                .task {
+                    await vm.loadPokemonInformation()
                 }
             }
-            .padding()
-            .task {
-                await vm.loadPokemonInformation()
+            .scrollIndicators(.hidden)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("\(vm.pokemonLink.name.capitalized)")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Label("Dismiss", systemImage: "chevron.down")
+                    }
+
+                }
             }
         }
-        .scrollIndicators(.hidden)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("\(vm.pokemonLink.name.capitalized)")
-        
     }
 }
 

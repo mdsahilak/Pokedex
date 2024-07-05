@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 final class HomeViewModel: ObservableObject {
     @Published var pokemons: [PokemonLink]? = nil
+    @Published var selectedPokemon: PokemonLink? = nil
     
     @Published var isSearching: Bool = false
     @Published var searchText: String = ""
