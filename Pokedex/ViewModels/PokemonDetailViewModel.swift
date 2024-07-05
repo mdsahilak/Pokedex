@@ -14,6 +14,7 @@ final class PokemonDetailViewModel: ObservableObject {
     let pokemonLink: PokemonLink
     
     @Published var pokemonInfo: PokemonInformation? = nil
+    @Published var currentImageIndex: Int? = nil
     
     init(pokemonLink: PokemonLink) {
         self.pokemonLink = pokemonLink
