@@ -43,7 +43,7 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Pokedex")
             .sheet(item: $vm.selectedPokemon) { selectedPokemon in
-                PokemonDetailView(vm: .init(pokemonLink: selectedPokemon))
+                PokemonDetailView(pokemon: selectedPokemon)
             }
         }
         .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: "Search Pokemons")
