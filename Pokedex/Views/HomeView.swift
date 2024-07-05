@@ -21,16 +21,22 @@ struct HomeView: View {
                                 Button {
                                     vm.selectedPokemon = pokemon
                                 } label: {
-                                    pokemonRow(for: pokemon)
+                                    pokemonCard(for: pokemon)
                                 }
+                                .tint(.primary)
                                 .padding(7)
                             }
                         }
                         .animation(.easeInOut, value: vm.searchedPokemons)
                         .padding()
+                        
+                        if vm.showPaginationLoader {
+                            SpacingLoaderView()
+                                .padding()
+                        }
                     }
                 } else {
-                    ProgressView()
+                    SpacingLoaderView()
                         .padding()
                 }
             }
@@ -46,7 +52,7 @@ struct HomeView: View {
         }
     }
     
-    private func pokemonRow(for pokemon: PokemonLink) -> some View {
+    private func pokemonCard(for pokemon: PokemonLink) -> some View {
         HStack {
             Spacer()
             
@@ -83,17 +89,6 @@ struct HomeView: View {
             return [GridItem(.flexible())]
         }
     }
-}
-
-
-struct Device {
-    // MARK: - Static Properties
-
-    /// The device is an iPad.
-    static let iPad = UIDevice.current.userInterfaceIdiom == .pad
-    
-    static let iPhoneSEor8 = UIDevice.current.userInterfaceIdiom == .phone && max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height) <= 667.0
-    
 }
 
 #Preview {
