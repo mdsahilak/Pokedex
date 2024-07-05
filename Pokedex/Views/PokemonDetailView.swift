@@ -39,7 +39,11 @@ struct PokemonDetailView: View {
                         .scrollTargetBehavior(.paging)
                         
                         Divider()
-                        Text("Height: \(pokemon.height) | Weight: \(pokemon.weight)")
+                        HStack {
+                            Text("Height: \(pokemon.height)")
+                            Divider()
+                            Text("Weight: \(pokemon.weight)")
+                        }
                         Divider()
                         
                         ForEach(pokemon.statInfos) { statInfo in
@@ -72,7 +76,6 @@ struct PokemonDetailView: View {
                     } label: {
                         Label("Dismiss", systemImage: "chevron.down")
                     }
-
                 }
             }
         }
