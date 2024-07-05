@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Custom errors related to Poke API Services
 enum PokemonServiceError: Error {
     case invalidURL
 }

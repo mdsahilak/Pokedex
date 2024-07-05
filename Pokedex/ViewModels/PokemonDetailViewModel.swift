@@ -20,9 +20,10 @@ final class PokemonDetailViewModel: ObservableObject {
         self.pokemonLink = pokemonLink
     }
     
+    /// Fetch detailed information about the selected pokemon
     public func loadPokemonInformation() async {
         do {
-            pokemonInfo = try await PokemonService.fetchPokemonInformation(for: URL(string: pokemonLink.url))
+            pokemonInfo = try await PokemonService.fetchPokemonInformation(for: pokemonLink.id)
         } catch {
             print(error)
         }
