@@ -31,12 +31,12 @@ struct HomeView: View {
                         .padding()
                         
                         if vm.showPaginationLoader {
-                            SpacingLoaderView()
+                            CircularLoaderView()
                                 .padding()
                         }
                     }
                 } else {
-                    SpacingLoaderView()
+                    CircularLoaderView()
                         .padding()
                 }
             }

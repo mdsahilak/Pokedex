@@ -1,5 +1,5 @@
 //
-//  SpacingLoaderView.swift
+//  CircularLoaderView.swift
 //  Pokedex
 //
 //  Created by Sahil Ak on 03/07/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SpacingLoaderView: View {
+struct CircularLoaderView: View {
     var body: some View {
         VStack {
             Spacer()
@@ -33,5 +33,5 @@ struct SpacingLoaderView: View {
 }
 
 #Preview {
-    SpacingLoaderView()
+    CircularLoaderView()
 }

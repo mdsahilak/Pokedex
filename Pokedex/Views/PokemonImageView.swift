@@ -23,7 +23,7 @@ struct PokemonImageView: View {
                 Image(systemName: "exclamationmark.circle")
                     .aspectRatio(1, contentMode: .fit)
             } else {
-                SpacingLoaderView()
+                CircularLoaderView()
             }
         }
     }

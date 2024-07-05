@@ -39,7 +39,7 @@ struct PokemonDetailView: View {
                             .padding(7)
                         }
                     } else {
-                        SpacingLoaderView()
+                        CircularLoaderView()
                             .padding(.top, 190)
                     }
                 }
