@@ -9,7 +9,11 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm: PokemonDetailViewModel
+    @StateObject var vm: PokemonDetailViewModel
+    
+    init(pokemon: PokemonLink) {
+        self._vm = StateObject(wrappedValue: PokemonDetailViewModel(pokemonLink: pokemon))
+    }
     
     var body: some View {
         NavigationStack {
@@ -112,5 +116,5 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(vm: .mock)
+    PokemonDetailView(pokemon: .mock)
 }

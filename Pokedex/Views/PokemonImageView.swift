@@ -18,10 +18,11 @@ struct PokemonImageView: View {
                 image
                     .resizable()
                     .aspectRatio(1, contentMode: contentMode)
-                
             } else if state.error != nil {
                 Image(systemName: "exclamationmark.circle")
                     .aspectRatio(1, contentMode: .fit)
+                    .font(.system(size: 33))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 CircularLoaderView()
             }
