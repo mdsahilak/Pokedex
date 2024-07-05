@@ -11,10 +11,6 @@ struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: PokemonDetailViewModel
     
-    init(pokemon: PokemonLink) {
-        self._vm = StateObject(wrappedValue: PokemonDetailViewModel(pokemonLink: pokemon))
-    }
-    
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
@@ -119,5 +115,5 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(pokemon: .mock)
+    PokemonDetailView(vm: .mock)
 }

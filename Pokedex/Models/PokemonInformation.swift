@@ -17,9 +17,6 @@ struct PokemonInformation: Codable, Identifiable {
     
     var weight: Int
     
-    var statsSum: Double { statInfos.reduce(0) { $0 + $1.baseStat } }
-    var statsTotal: Double { 255.0 * Double(statInfos.count) }
-    
     var homeSpriteURL: URL? {
         return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(id).png")
     }

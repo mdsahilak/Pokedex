@@ -7,14 +7,6 @@
 
 import Foundation
 
-struct PokemonAPIResponse: Codable {
-    var count: Int
-    var next: String?
-    var previous: String?
-    
-    var results: [PokemonLink]
-}
-
 struct PokemonLink: Codable, Hashable, Identifiable {
     static let mock: PokemonLink = .init(name: "squirtle", url: "https://pokeapi.co/api/v2/pokemon/7/")
     

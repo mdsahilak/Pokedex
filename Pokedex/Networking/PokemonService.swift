@@ -22,7 +22,7 @@ final class PokemonService {
         return URLSession(configuration: config)
     }()
     
-    public static func fetchPokemons(url: URL? = baseURL) async throws -> PokemonAPIResponse {
+    public static func fetchPokemons(url: URL? = baseURL) async throws -> PokeAPIResponse {
         guard let url = url else { throw PokemonServiceError.invalidURL }
         
         let (data, _) = try await session.data(from: url)
@@ -30,7 +30,7 @@ final class PokemonService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        let decodedData = try decoder.decode(PokemonAPIResponse.self, from: data)
+        let decodedData = try decoder.decode(PokeAPIResponse.self, from: data)
         
         return decodedData
     }
