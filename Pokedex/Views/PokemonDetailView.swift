@@ -115,5 +115,5 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(vm: .mock)
+    PokemonDetailView(vm: .init(pokemonLink: .mock))
 }

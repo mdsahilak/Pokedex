@@ -9,8 +9,6 @@ import SwiftUI
 
 @MainActor
 final class PokemonDetailViewModel: ObservableObject {
-    static let mock: PokemonDetailViewModel = .init(pokemonLink: .mock)
-    
     let pokemonLink: PokemonLink
     
     @Published var pokemonInfo: PokemonInformation? = nil
