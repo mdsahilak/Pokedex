@@ -72,9 +72,9 @@ struct PokemonDetailView: View {
     private func heightAndWeightBar(for pokemon: PokemonInformation) -> some View {
         Divider()
         HStack {
-            Text("\(Constants.heightText): \(pokemon.height)")
+            Text("\(TextAsset.heightText): \(pokemon.height)")
             Divider()
-            Text("\(Constants.weightText): \(pokemon.weight)")
+            Text("\(TextAsset.weightText): \(pokemon.weight)")
         }
         Divider()
     }
@@ -83,7 +83,7 @@ struct PokemonDetailView: View {
     @ViewBuilder
     private func statsView(for pokemon: PokemonInformation) -> some View {
         ForEach(pokemon.statInfos) { statInfo in
-            ProgressView(value: statInfo.baseStat, total: 255.0) {
+            ProgressView(value: statInfo.baseStat, total: Constants.statsMaxValue) {
                 HStack {
                     Text(statInfo.statLink.name.capitalized)
                     Spacer()
