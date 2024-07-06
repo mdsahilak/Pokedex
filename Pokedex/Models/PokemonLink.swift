@@ -7,23 +7,17 @@
 
 import Foundation
 
-struct PokemonAPIResponse: Codable {
-    var count: Int
-    var next: String?
-    var previous: String?
-    
-    var results: [PokemonLink]
-}
-
+/// The A pokemon object representing very basic information about a pokemon.
 struct PokemonLink: Codable, Hashable, Identifiable {
-    static let mock: PokemonLink = .init(name: "squirtle", url: "https://pokeapi.co/api/v2/pokemon/7/")
+    /// Mock object for testing in previews
+    static let mock: PokemonLink = .init(name: "squirtle", url: "\(PokeAPI.baseURL)/7/")
     
     var id: Int { Int((url as NSString).lastPathComponent) ?? 0 }
     
     var name: String
+    
+    /// The url to access detailed information about the pokemon
     var url: String
     
-    var imageURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
-    }
+    var imageURL: URL? { URL(string: PokeAPI.officialSpriteURL(for: id)) }
 }

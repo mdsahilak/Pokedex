@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// Service cass for API calls to the Poke API
 final class PokemonService {
     private init() {  }
     
-    private static let baseURL: URL? = URL(string: "https://pokeapi.co/api/v2/pokemon/")
+    /// The base url for the Poke API
+    private static let baseURL: URL? = URL(string: PokeAPI.baseURL)
     
+    /// URL Session object with a custom configuration
     private static let session: URLSession = {
         let config = URLSessionConfiguration.default
         
@@ -22,7 +25,10 @@ final class PokemonService {
         return URLSession(configuration: config)
     }()
     
-    public static func fetchPokemons(url: URL? = baseURL) async throws -> PokemonAPIResponse {
+    /// Fetches Pokemons from the paginated PokeAPI.
+    /// - Parameter url: The optional url to fetch the pokemons from, in terms of pagination. If no url is provided, the first page is fetched.
+    /// - Returns: The API response including the pokemons list and the url for the next page of pokemons.
+    public static func fetchPokemons(url: URL? = baseURL) async throws -> PokeAPIResponse {
         guard let url = url else { throw PokemonServiceError.invalidURL }
         
         let (data, _) = try await session.data(from: url)
@@ -30,15 +36,20 @@ final class PokemonService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        let decodedData = try decoder.decode(PokemonAPIResponse.self, from: data)
+        let decodedData = try decoder.decode(PokeAPIResponse.self, from: data)
         
         return decodedData
     }
     
-    public static func fetchPokemonInformation(for url: URL?) async throws -> PokemonInformation {
-        guard let url = url else { throw PokemonServiceError.invalidURL }
+    /// Fetch detailed information about a specific pokemon using Poke API
+    /// - Parameter id: The ID of the pokemon you want to fetch
+    /// - Returns: All information about the pokemon including name, height, weight, stats etc.
+    public static func fetchPokemonInformation(for id: Int) async throws -> PokemonInformation {
+        guard let baseURL else { throw PokemonServiceError.invalidURL }
         
-        let (data, _) = try await session.data(from: url)
+        let pokemonURL = baseURL.appending(path: "\(id)")
+        
+        let (data, _) = try await session.data(from: pokemonURL)
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase

@@ -8,6 +8,7 @@
 import SwiftUI
 import NukeUI
 
+/// Asynchrously loaded image view for displaying pokemon artwork
 struct PokemonImageView: View {
     var url: URL? = nil
     var contentMode: ContentMode = .fit

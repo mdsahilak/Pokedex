@@ -7,29 +7,28 @@
 
 import SwiftUI
 
+/// A pokemon object representing detailed information about a pokemon
 struct PokemonInformation: Codable, Identifiable {
     var height: Int
     
     var id: Int
     var name: String
     
+    /// All stats related to the pokemon
     var statInfos: [StatInfo]
     
     var weight: Int
     
-    var statsSum: Double { statInfos.reduce(0) { $0 + $1.baseStat } }
-    var statsTotal: Double { 255.0 * Double(statInfos.count) }
-    
-    var homeSpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(id).png")
-    }
-    
     var officialSpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
+        return URL(string: PokeAPI.officialSpriteURL(for: id))
     }
     
     var shinySpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/\(id).png")
+        return URL(string: PokeAPI.shinySpriteURL(for: id))
+    }
+    
+    var homeSpriteURL: URL? {
+        return URL(string: PokeAPI.homeSpriteURL(for: id))
     }
     
     enum CodingKeys: String, CodingKey {
@@ -40,6 +39,7 @@ struct PokemonInformation: Codable, Identifiable {
         case weight
     }
     
+    /// Object representing the value of a particular stat
     struct StatInfo: Codable, Identifiable {
         var id: String { statLink.name }
         
@@ -51,6 +51,7 @@ struct PokemonInformation: Codable, Identifiable {
             case statLink = "stat"
         }
         
+        /// Object representing the type of stat
         struct StatLink: Codable {
             var name: String
             var url: String

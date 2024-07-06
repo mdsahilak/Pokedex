@@ -7,13 +7,10 @@
 
 import SwiftUI
 
+/// View to display detailed information about a pokemon
 struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: PokemonDetailViewModel
-    
-    init(pokemon: PokemonLink) {
-        self._vm = StateObject(wrappedValue: PokemonDetailViewModel(pokemonLink: pokemon))
-    }
     
     var body: some View {
         NavigationStack {
@@ -21,37 +18,14 @@ struct PokemonDetailView: View {
                 VStack {
                     if let pokemon = vm.pokemonInfo {
                         indicatorView
-                        ScrollView(.horizontal) {
-                            LazyHStack(spacing: 0) {
-                                pokemonImageCard(for: pokemon.officialSpriteURL)
-                                    .id(0)
-                                
-                                pokemonImageCard(for: pokemon.shinySpriteURL)
-                                    .id(1)
-                                
-                                pokemonImageCard(for: pokemon.homeSpriteURL)
-                                    .id(2)
-                            }
-                            .scrollTargetLayout()
-                        }
-                        .scrollPosition(id: $vm.currentImageIndex)
-                        .scrollIndicators(.hidden)
-                        .scrollTargetBehavior(.paging)
+                            .accessibilityHidden(true)
                         
-                        Divider()
-                        Text("Height: \(pokemon.height) | Weight: \(pokemon.weight)")
-                        Divider()
+                        imageCarousel(for: pokemon)
+                            .accessibilityHidden(true)
                         
-                        ForEach(pokemon.statInfos) { statInfo in
-                            ProgressView(value: statInfo.baseStat, total: 255.0) {
-                                HStack {
-                                    Text(statInfo.statLink.name.capitalized)
-                                    Spacer()
-                                    Text("\(statInfo.baseStat, specifier: "%.0f")")
-                                }
-                            }
-                            .padding(7)
-                        }
+                        heightAndWeightBar(for: pokemon)
+                        
+                        statsView(for: pokemon)
                     } else {
                         CircularLoaderView()
                             .padding(.top, 190)
@@ -67,17 +41,60 @@ struct PokemonDetailView: View {
             .navigationTitle("\(vm.pokemonLink.name.capitalized)")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Dismiss", systemImage: "chevron.down")
-                    }
-
+                    dismissButton
                 }
             }
         }
     }
     
+    /// Image carousel with special zoom effects
+    private func imageCarousel(for pokemon: PokemonInformation) -> some View {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 0) {
+                pokemonImageCard(for: pokemon.officialSpriteURL)
+                    .id(0)
+                
+                pokemonImageCard(for: pokemon.shinySpriteURL)
+                    .id(1)
+                
+                pokemonImageCard(for: pokemon.homeSpriteURL)
+                    .id(2)
+            }
+            .scrollTargetLayout()
+        }
+        .scrollPosition(id: $vm.currentImageIndex)
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.paging)
+    }
+    
+    /// Height and weight display bar
+    @ViewBuilder
+    private func heightAndWeightBar(for pokemon: PokemonInformation) -> some View {
+        Divider()
+        HStack {
+            Text("\(Constants.heightText): \(pokemon.height)")
+            Divider()
+            Text("\(Constants.weightText): \(pokemon.weight)")
+        }
+        Divider()
+    }
+    
+    /// View to display the statics using progress bars
+    @ViewBuilder
+    private func statsView(for pokemon: PokemonInformation) -> some View {
+        ForEach(pokemon.statInfos) { statInfo in
+            ProgressView(value: statInfo.baseStat, total: 255.0) {
+                HStack {
+                    Text(statInfo.statLink.name.capitalized)
+                    Spacer()
+                    Text("\(statInfo.baseStat, specifier: "%.0f")")
+                }
+            }
+            .padding(7)
+        }
+    }
+    
+    /// Card to display a single sprite of the pokemon
     private func pokemonImageCard(for url: URL?) -> some View {
         PokemonImageView(url: url)
             .frame(maxHeight: 350)
@@ -95,6 +112,7 @@ struct PokemonDetailView: View {
             }
     }
     
+    /// Interactive Indicator for the image carousel
     private var indicatorView: some View {
         HStack {
             ForEach(0..<3, id: \.self) { val in
@@ -113,8 +131,17 @@ struct PokemonDetailView: View {
         }
         .padding(.bottom, 7)
     }
+    
+    /// Dismiss button for the sheet's navigation bar
+    private var dismissButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Label("Dismiss", systemImage: "chevron.down")
+        }
+    }
 }
 
 #Preview {
-    PokemonDetailView(pokemon: .mock)
+    PokemonDetailView(vm: .init(pokemonLink: .mock))
 }
