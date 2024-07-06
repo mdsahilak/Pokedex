@@ -10,6 +10,8 @@ import Drops
 
 /// Helper struct to send Toasts
 struct Dropper {
+    private init() {  }
+    
     /// Send a UI Toast message to the user
     /// - Parameters:
     ///   - type: the type of toast to send, i.e a warning, success or error.
