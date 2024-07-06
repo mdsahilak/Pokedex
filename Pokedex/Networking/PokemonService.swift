@@ -12,7 +12,7 @@ final class PokemonService {
     private init() {  }
     
     /// The base url for the Poke API
-    private static let baseURL: URL? = URL(string: "https://pokeapi.co/api/v2/pokemon/")
+    private static let baseURL: URL? = URL(string: PokeAPI.baseURL)
     
     /// URL Session object with a custom configuration
     private static let session: URLSession = {

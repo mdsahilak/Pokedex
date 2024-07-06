@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+/// A pokemon object representing detailed information about a pokemon
 struct PokemonInformation: Codable, Identifiable {
     var height: Int
     
     var id: Int
     var name: String
     
+    /// All stats related to the pokemon
     var statInfos: [StatInfo]
     
     var weight: Int
@@ -37,6 +39,7 @@ struct PokemonInformation: Codable, Identifiable {
         case weight
     }
     
+    /// Object representing the value of a particular stat
     struct StatInfo: Codable, Identifiable {
         var id: String { statLink.name }
         
@@ -48,6 +51,7 @@ struct PokemonInformation: Codable, Identifiable {
             case statLink = "stat"
         }
         
+        /// Object representing the type of stat
         struct StatLink: Codable {
             var name: String
             var url: String
