@@ -79,6 +79,7 @@ struct HomeView: View {
                 .foregroundStyle(.gray.gradient.opacity(0.3))
         }
         .task {
+            // Pagination fetch on load of last items
             guard !vm.isSearching else { return }
             
             if let lastPokemon = vm.pokemons?.last {
