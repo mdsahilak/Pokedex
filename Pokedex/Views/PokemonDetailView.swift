@@ -99,10 +99,7 @@ struct PokemonDetailView: View {
         PokemonImageView(url: url)
             .frame(maxHeight: 350)
             .padding()
-            .background {
-                RoundedRectangle(cornerRadius: 13)
-                    .foregroundStyle(.gray.gradient.opacity(0.3))
-            }
+            .cardBackground()
             .padding(7)
             .containerRelativeFrame(.horizontal)
             .scrollTransition(.animated, axis: .horizontal) { content, phase in
