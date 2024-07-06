@@ -1,5 +1,5 @@
 //
-//  TextAsset.swift
+//  TextAssets.swift
 //  Pokedex
 //
 //  Created by Sahil Ak on 06/07/2024.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// Constants & raw user-facing strings used throughout the app
-enum TextAsset {
+/// Raw user-facing strings used throughout the app
+enum TextAssets {
     static let appTitle: String = "Pokedex"
     static let searchBarPrompt: String = "Search Pokemons"
     

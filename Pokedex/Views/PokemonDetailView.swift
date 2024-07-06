@@ -72,9 +72,9 @@ struct PokemonDetailView: View {
     private func heightAndWeightBar(for pokemon: PokemonInformation) -> some View {
         Divider()
         HStack {
-            Text("\(TextAsset.heightText): \(pokemon.height)")
+            Text("\(TextAssets.heightText): \(pokemon.height)")
             Divider()
-            Text("\(TextAsset.weightText): \(pokemon.weight)")
+            Text("\(TextAssets.weightText): \(pokemon.weight)")
         }
         Divider()
     }

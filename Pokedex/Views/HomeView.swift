@@ -34,12 +34,12 @@ struct HomeView: View {
                 await vm.loadPokemons()
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(TextAsset.appTitle)
+            .navigationTitle(TextAssets.appTitle)
             .sheet(item: $vm.selectedPokemon) { selectedPokemon in
                 PokemonDetailView(vm: .init(pokemonLink: selectedPokemon))
             }
         }
-        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: TextAsset.searchBarPrompt)
+        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: TextAssets.searchBarPrompt)
         .task {
             await vm.loadPokemons()
         }
