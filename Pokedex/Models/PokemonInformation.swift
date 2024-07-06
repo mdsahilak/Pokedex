@@ -17,16 +17,16 @@ struct PokemonInformation: Codable, Identifiable {
     
     var weight: Int
     
-    var homeSpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(id).png")
-    }
-    
     var officialSpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
+        return URL(string: PokeAPI.officialSpriteURL(for: id))
     }
     
     var shinySpriteURL: URL? {
-        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/\(id).png")
+        return URL(string: PokeAPI.shinySpriteURL(for: id))
+    }
+    
+    var homeSpriteURL: URL? {
+        return URL(string: PokeAPI.homeSpriteURL(for: id))
     }
     
     enum CodingKeys: String, CodingKey {
