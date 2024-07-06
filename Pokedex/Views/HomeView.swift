@@ -30,6 +30,9 @@ struct HomeView: View {
                         .padding()
                 }
             }
+            .refreshable {
+                await vm.loadPokemons()
+            }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(Constants.appTitle)
             .sheet(item: $vm.selectedPokemon) { selectedPokemon in
