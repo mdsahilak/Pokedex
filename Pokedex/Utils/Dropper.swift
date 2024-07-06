@@ -8,6 +8,7 @@
 import SwiftUI
 import Drops
 
+/// Helper struct to send Toasts
 struct Dropper {
     static func send(_ type: MessageType, message: MessageItem) {
         Drops.show(

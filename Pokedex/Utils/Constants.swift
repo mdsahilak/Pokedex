@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Constants & raw user-facing strings used throughout the app
 enum Constants {
     static let appTitle: String = "Pokedex"
     static let searchBarPrompt: String = "Search Pokemons"
