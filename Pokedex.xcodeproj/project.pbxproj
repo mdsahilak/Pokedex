@@ -26,6 +26,7 @@
 		BA997E212C35D190007C2E51 /* PokemonServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA997E202C35D190007C2E51 /* PokemonServiceError.swift */; };
 		BADF5D1F2C387CF90096368B /* PokeAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D1E2C387CF90096368B /* PokeAPIResponse.swift */; };
 		BADF5D232C38825E0096368B /* PokeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D222C38825E0096368B /* PokeAPI.swift */; };
+		BADF5D272C38F44B0096368B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D262C38F44B0096368B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		BA997E202C35D190007C2E51 /* PokemonServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonServiceError.swift; sourceTree = "<group>"; };
 		BADF5D1E2C387CF90096368B /* PokeAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPIResponse.swift; sourceTree = "<group>"; };
 		BADF5D222C38825E0096368B /* PokeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPI.swift; sourceTree = "<group>"; };
+		BADF5D262C38F44B0096368B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		BA997E062C337876007C2E51 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				BADF5D222C38825E0096368B /* PokeAPI.swift */,
 				BA997E072C3378FF007C2E51 /* PokemonService.swift */,
 				BA997E202C35D190007C2E51 /* PokemonServiceError.swift */,
 			);
@@ -153,7 +156,7 @@
 		BADF5D212C3882240096368B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				BADF5D222C38825E0096368B /* PokeAPI.swift */,
+				BADF5D262C38F44B0096368B /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				BA997E1D2C35BD23007C2E51 /* PokemonDetailViewModel.swift in Sources */,
 				BADF5D1F2C387CF90096368B /* PokeAPIResponse.swift in Sources */,
 				BA997E0C2C349A7C007C2E51 /* HomeViewModel.swift in Sources */,
+				BADF5D272C38F44B0096368B /* Constants.swift in Sources */,
 				BA997E0A2C337BC4007C2E51 /* PokemonLink.swift in Sources */,
 				BA997E192C350015007C2E51 /* PokemonInformation.swift in Sources */,
 			);

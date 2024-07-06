@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View for the initial home screen
 struct HomeView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @StateObject var vm: HomeViewModel = HomeViewModel()
@@ -30,17 +31,18 @@ struct HomeView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Pokedex")
+            .navigationTitle(Constants.appTitle)
             .sheet(item: $vm.selectedPokemon) { selectedPokemon in
                 PokemonDetailView(vm: .init(pokemonLink: selectedPokemon))
             }
         }
-        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: "Search Pokemons")
+        .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: Constants.searchBarPrompt)
         .task {
             await vm.loadPokemons()
         }
     }
     
+    /// The grid of pokemon cards that adapt to multiple colums based on the device
     private func pokemonCardGrid(for pokemons: [PokemonLink]) -> some View {
         LazyVGrid(columns: columnsForDevice) {
             ForEach(pokemons) { pokemon in
@@ -56,6 +58,7 @@ struct HomeView: View {
         .animation(.easeInOut, value: vm.searchedPokemons)
     }
     
+    /// View representing an individual pokemon card
     private func pokemonCard(for pokemon: PokemonLink) -> some View {
         HStack {
             Spacer()
@@ -86,6 +89,7 @@ struct HomeView: View {
         }
     }
     
+    /// Adaptive columns based on the horizontal size class of the device
     private var columnsForDevice: [GridItem] {
         if horizontalSizeClass == .regular {
             return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]

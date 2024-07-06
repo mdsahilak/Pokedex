@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View to display detailed information about a pokemon
 struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: PokemonDetailViewModel
@@ -44,6 +45,7 @@ struct PokemonDetailView: View {
         }
     }
     
+    /// Image carousel with special zoom effects
     private func imageCarousel(for pokemon: PokemonInformation) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
@@ -63,17 +65,19 @@ struct PokemonDetailView: View {
         .scrollTargetBehavior(.paging)
     }
     
+    /// Height and weight display bar
     @ViewBuilder
     private func heightAndWeightBar(for pokemon: PokemonInformation) -> some View {
         Divider()
         HStack {
-            Text("Height: \(pokemon.height)")
+            Text("\(Constants.heightText): \(pokemon.height)")
             Divider()
-            Text("Weight: \(pokemon.weight)")
+            Text("\(Constants.weightText): \(pokemon.weight)")
         }
         Divider()
     }
     
+    /// View to display the statics using progress bars
     @ViewBuilder
     private func statsView(for pokemon: PokemonInformation) -> some View {
         ForEach(pokemon.statInfos) { statInfo in
@@ -88,6 +92,7 @@ struct PokemonDetailView: View {
         }
     }
     
+    /// Card to display a single sprite of the pokemon
     private func pokemonImageCard(for url: URL?) -> some View {
         PokemonImageView(url: url)
             .frame(maxHeight: 350)
@@ -105,6 +110,7 @@ struct PokemonDetailView: View {
             }
     }
     
+    /// Interactive Indicator for the image carousel
     private var indicatorView: some View {
         HStack {
             ForEach(0..<3, id: \.self) { val in
@@ -124,6 +130,7 @@ struct PokemonDetailView: View {
         .padding(.bottom, 7)
     }
     
+    /// Dismiss button for the sheet's navigation bar
     private var dismissButton: some View {
         Button {
             dismiss()
