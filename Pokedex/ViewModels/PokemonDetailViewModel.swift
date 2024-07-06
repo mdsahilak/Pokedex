@@ -11,7 +11,10 @@ import SwiftUI
 final class PokemonDetailViewModel: ObservableObject {
     let pokemonLink: PokemonLink
     
+    /// The detailed information related to the currently selected pokemon
     @Published var pokemonInfo: PokemonInformation? = nil
+    
+    /// Value indicating the current image shown in the carousel
     @Published var currentImageIndex: Int? = nil
     
     init(pokemonLink: PokemonLink) {

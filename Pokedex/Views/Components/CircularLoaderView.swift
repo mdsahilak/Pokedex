@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A spacing loader with a custom 3D design
 struct CircularLoaderView: View {
     var body: some View {
         ProgressView()
