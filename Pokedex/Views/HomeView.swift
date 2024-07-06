@@ -69,6 +69,7 @@ struct HomeView: View {
             VStack {
                 PokemonImageView(url: pokemon.imageURL)
                     .frame(width: 100, height: 100, alignment: .center)
+                    .accessibilityHidden(true)
                 
                 Text(pokemon.name.capitalized)
                     .font(.title3)

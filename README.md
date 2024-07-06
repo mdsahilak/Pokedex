@@ -10,7 +10,7 @@
 - Supports VoiceOver, Dynamic Type and Landscape.
 
 **Third-Party Libraries Used:**
-- Nuke - High-performance image async image loading library to display Pokemon sprites.
+- Nuke - High-performance async image loading library to display Pokemon sprites.
 - Drops - To display accessible toasts to the User.
 
 **Extras**

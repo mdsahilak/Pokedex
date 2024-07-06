@@ -18,8 +18,10 @@ struct PokemonDetailView: View {
                 VStack {
                     if let pokemon = vm.pokemonInfo {
                         indicatorView
+                            .accessibilityHidden(true)
                         
                         imageCarousel(for: pokemon)
+                            .accessibilityHidden(true)
                         
                         heightAndWeightBar(for: pokemon)
                         
