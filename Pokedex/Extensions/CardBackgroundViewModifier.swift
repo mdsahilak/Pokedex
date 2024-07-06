@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// View Modifier that applies a silver gradient card background
+// View Modifier that applies a silver gradient card background
 private struct CardBackgroundViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -20,6 +20,7 @@ private struct CardBackgroundViewModifier: ViewModifier {
 
 // MARK: - Extension -
 extension View {
+    /// Apply a silver gradient card background to the view
     func cardBackground() -> some View {
         self.modifier(CardBackgroundViewModifier())
     }
