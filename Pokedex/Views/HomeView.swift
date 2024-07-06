@@ -78,10 +78,7 @@ struct HomeView: View {
             Spacer()
         }
         .padding()
-        .background {
-            RoundedRectangle(cornerRadius: 13)
-                .foregroundStyle(.gray.gradient.opacity(0.3))
-        }
+        .cardBackground()
         .task {
             // Pagination fetch on load of last items
             guard !vm.isSearching else { return }

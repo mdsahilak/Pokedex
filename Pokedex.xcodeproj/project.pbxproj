@@ -29,6 +29,7 @@
 		BADF5D272C38F44B0096368B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D262C38F44B0096368B /* Constants.swift */; };
 		BADF5D292C38F7E50096368B /* Dropper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D282C38F7E50096368B /* Dropper.swift */; };
 		BADF5D2C2C38F81F0096368B /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = BADF5D2B2C38F81F0096368B /* Drops */; };
+		BADF5D2F2C3902FB0096368B /* CardBackgroundViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5D2E2C3902FB0096368B /* CardBackgroundViewModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		BADF5D222C38825E0096368B /* PokeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeAPI.swift; sourceTree = "<group>"; };
 		BADF5D262C38F44B0096368B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BADF5D282C38F7E50096368B /* Dropper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropper.swift; sourceTree = "<group>"; };
+		BADF5D2E2C3902FB0096368B /* CardBackgroundViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackgroundViewModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				BA997E042C334D3B007C2E51 /* Views */,
 				BA997E062C337876007C2E51 /* Networking */,
 				BADF5D212C3882240096368B /* Utils */,
+				BADF5D2D2C3902CF0096368B /* Extensions */,
 				BA997DF72C334CA3007C2E51 /* Assets.xcassets */,
 				BA997DF92C334CA3007C2E51 /* Preview Content */,
 			);
@@ -164,6 +167,14 @@
 				BADF5D282C38F7E50096368B /* Dropper.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BADF5D2D2C3902CF0096368B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BADF5D2E2C3902FB0096368B /* CardBackgroundViewModifier.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 				BA997E0C2C349A7C007C2E51 /* HomeViewModel.swift in Sources */,
 				BADF5D272C38F44B0096368B /* Constants.swift in Sources */,
 				BA997E0A2C337BC4007C2E51 /* PokemonLink.swift in Sources */,
+				BADF5D2F2C3902FB0096368B /* CardBackgroundViewModifier.swift in Sources */,
 				BA997E192C350015007C2E51 /* PokemonInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
