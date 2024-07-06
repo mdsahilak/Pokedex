@@ -165,8 +165,8 @@
 		BADF5D212C3882240096368B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				BADF5D302C399CD60096368B /* Constants.swift */,
 				BADF5D262C38F44B0096368B /* TextAssets.swift */,
+				BADF5D302C399CD60096368B /* Constants.swift */,
 				BADF5D282C38F7E50096368B /* Dropper.swift */,
 			);
 			path = Utils;
