@@ -37,7 +37,10 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    // MARK: - API Calls -
+}
+
+// MARK: - API Call Handlers -
+extension HomeViewModel {
     /// Initial API fetch for Pokemons for the first page of pokemons
     public func loadPokemons() async {
         do {

@@ -21,6 +21,10 @@ final class PokemonDetailViewModel: ObservableObject {
         self.pokemonLink = pokemonLink
     }
     
+}
+
+// MARK: - API Call Handlers -
+extension PokemonDetailViewModel {
     /// Fetch detailed information about the selected pokemon
     public func loadPokemonInformation() async {
         do {
