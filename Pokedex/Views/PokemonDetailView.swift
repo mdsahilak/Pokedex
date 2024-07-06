@@ -17,41 +17,12 @@ struct PokemonDetailView: View {
                 VStack {
                     if let pokemon = vm.pokemonInfo {
                         indicatorView
-                        ScrollView(.horizontal) {
-                            LazyHStack(spacing: 0) {
-                                pokemonImageCard(for: pokemon.officialSpriteURL)
-                                    .id(0)
-                                
-                                pokemonImageCard(for: pokemon.shinySpriteURL)
-                                    .id(1)
-                                
-                                pokemonImageCard(for: pokemon.homeSpriteURL)
-                                    .id(2)
-                            }
-                            .scrollTargetLayout()
-                        }
-                        .scrollPosition(id: $vm.currentImageIndex)
-                        .scrollIndicators(.hidden)
-                        .scrollTargetBehavior(.paging)
                         
-                        Divider()
-                        HStack {
-                            Text("Height: \(pokemon.height)")
-                            Divider()
-                            Text("Weight: \(pokemon.weight)")
-                        }
-                        Divider()
+                        imageCarousel(for: pokemon)
                         
-                        ForEach(pokemon.statInfos) { statInfo in
-                            ProgressView(value: statInfo.baseStat, total: 255.0) {
-                                HStack {
-                                    Text(statInfo.statLink.name.capitalized)
-                                    Spacer()
-                                    Text("\(statInfo.baseStat, specifier: "%.0f")")
-                                }
-                            }
-                            .padding(7)
-                        }
+                        heightAndWeightBar(for: pokemon)
+                        
+                        statsView(for: pokemon)
                     } else {
                         CircularLoaderView()
                             .padding(.top, 190)
@@ -67,13 +38,53 @@ struct PokemonDetailView: View {
             .navigationTitle("\(vm.pokemonLink.name.capitalized)")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Dismiss", systemImage: "chevron.down")
-                    }
+                    dismissButton
                 }
             }
+        }
+    }
+    
+    private func imageCarousel(for pokemon: PokemonInformation) -> some View {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 0) {
+                pokemonImageCard(for: pokemon.officialSpriteURL)
+                    .id(0)
+                
+                pokemonImageCard(for: pokemon.shinySpriteURL)
+                    .id(1)
+                
+                pokemonImageCard(for: pokemon.homeSpriteURL)
+                    .id(2)
+            }
+            .scrollTargetLayout()
+        }
+        .scrollPosition(id: $vm.currentImageIndex)
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.paging)
+    }
+    
+    @ViewBuilder
+    private func heightAndWeightBar(for pokemon: PokemonInformation) -> some View {
+        Divider()
+        HStack {
+            Text("Height: \(pokemon.height)")
+            Divider()
+            Text("Weight: \(pokemon.weight)")
+        }
+        Divider()
+    }
+    
+    @ViewBuilder
+    private func statsView(for pokemon: PokemonInformation) -> some View {
+        ForEach(pokemon.statInfos) { statInfo in
+            ProgressView(value: statInfo.baseStat, total: 255.0) {
+                HStack {
+                    Text(statInfo.statLink.name.capitalized)
+                    Spacer()
+                    Text("\(statInfo.baseStat, specifier: "%.0f")")
+                }
+            }
+            .padding(7)
         }
     }
     
@@ -111,6 +122,14 @@ struct PokemonDetailView: View {
             }
         }
         .padding(.bottom, 7)
+    }
+    
+    private var dismissButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Label("Dismiss", systemImage: "chevron.down")
+        }
     }
 }
 

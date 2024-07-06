@@ -16,19 +16,8 @@ struct HomeView: View {
             VStack {
                 if let pokemons = vm.searchedPokemons {
                     ScrollView {
-                        LazyVGrid(columns: columnsForDevice()) {
-                            ForEach(pokemons) { pokemon in
-                                Button {
-                                    vm.selectedPokemon = pokemon
-                                } label: {
-                                    pokemonCard(for: pokemon)
-                                }
-                                .tint(.primary)
-                                .padding(7)
-                            }
-                        }
-                        .animation(.easeInOut, value: vm.searchedPokemons)
-                        .padding()
+                        pokemonCardGrid(for: pokemons)
+                            .padding()
                         
                         if vm.showPaginationLoader {
                             CircularLoaderView()
@@ -50,6 +39,21 @@ struct HomeView: View {
         .task {
             await vm.loadPokemons()
         }
+    }
+    
+    private func pokemonCardGrid(for pokemons: [PokemonLink]) -> some View {
+        LazyVGrid(columns: columnsForDevice) {
+            ForEach(pokemons) { pokemon in
+                Button {
+                    vm.selectedPokemon = pokemon
+                } label: {
+                    pokemonCard(for: pokemon)
+                }
+                .tint(.primary)
+                .padding(7)
+            }
+        }
+        .animation(.easeInOut, value: vm.searchedPokemons)
     }
     
     private func pokemonCard(for pokemon: PokemonLink) -> some View {
@@ -82,7 +86,7 @@ struct HomeView: View {
         }
     }
     
-    private func columnsForDevice() -> [GridItem] {
+    private var columnsForDevice: [GridItem] {
         if horizontalSizeClass == .regular {
             return [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
         } else {
