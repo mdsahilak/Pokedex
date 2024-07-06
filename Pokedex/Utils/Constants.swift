@@ -13,4 +13,9 @@ enum Constants {
     
     static let heightText: String = "Height"
     static let weightText: String = "Weight"
+    
+    static let errorText: String = "Error"
+    
+    static let failedToFetchPokemonsError: String = "Failed to fetch Pokemons. Please try again."
+    static let failedToFetchPokemonDetailsError: String = "Failed to fetch the Pokemon. Please try again."
 }

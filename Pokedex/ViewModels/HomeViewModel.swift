@@ -49,6 +49,9 @@ extension HomeViewModel {
             pokemons = data.results
             nextPagePath = data.next
         } catch {
+            Dropper.send(.error, message: .init(title: Constants.errorText, subtitle: Constants.failedToFetchPokemonsError))
+            pokemons = []
+            
             print(error)
         }
     }

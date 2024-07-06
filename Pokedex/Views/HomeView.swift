@@ -14,9 +14,9 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                if let pokemons = vm.searchedPokemons {
-                    ScrollView {
+            ScrollView {
+                VStack {
+                    if let pokemons = vm.searchedPokemons {
                         pokemonCardGrid(for: pokemons)
                             .padding()
                         
@@ -24,10 +24,10 @@ struct HomeView: View {
                             CircularLoaderView()
                                 .padding()
                         }
+                    } else {
+                        CircularLoaderView()
+                            .padding()
                     }
-                } else {
-                    CircularLoaderView()
-                        .padding()
                 }
             }
             .refreshable {
