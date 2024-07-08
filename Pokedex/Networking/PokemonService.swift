@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Service cass for API calls to the Poke API
+/// Namespace for service helper functions that wrap networking calls to the Poke API
 enum PokemonService {
     /// The base url for the Poke API
     private static let baseURL: URL? = URL(string: PokeAPI.baseURL)
