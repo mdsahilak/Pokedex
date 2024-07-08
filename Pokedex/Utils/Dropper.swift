@@ -8,8 +8,10 @@
 import SwiftUI
 import Drops
 
-/// Helper struct to send Toasts
-enum Dropper {
+/// Helper methods for accessible toasts to the user
+struct Dropper {
+    private init() {  }
+    
     /// Send a UI Toast message to the user
     /// - Parameters:
     ///   - type: the type of toast to send, i.e a warning, success or error.
