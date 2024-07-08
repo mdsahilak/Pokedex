@@ -8,9 +8,7 @@
 import Foundation
 
 /// Service cass for API calls to the Poke API
-final class PokemonService {
-    private init() {  }
-    
+enum PokemonService {
     /// The base url for the Poke API
     private static let baseURL: URL? = URL(string: PokeAPI.baseURL)
     
