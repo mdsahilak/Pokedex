@@ -30,7 +30,7 @@ extension PokemonDetailViewModel {
         do {
             pokemonInfo = try await PokemonService.fetchPokemonInformation(for: pokemonLink.id)
         } catch {
-            Dropper.send(.error, message: .init(title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonDetailsError))
+            Dropper.send(.error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonDetailsError)
             print(error)
         }
     }

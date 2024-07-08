@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Namespace for holding all PokeAPI endpoint urls used within the app as well as the related helper functions.
 enum PokeAPI {
     static let baseURL: String = "https://pokeapi.co/api/v2/pokemon/"
     
