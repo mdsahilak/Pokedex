@@ -23,6 +23,7 @@ final class HomeViewModel: ObservableObject {
     /// State to show / hide the loader while fetching the next page of pokemons
     @Published var showPaginationLoader: Bool = false
     
+    /// The publisher to send drop message information to the view
     var dropPublisher = PassthroughSubject<Dropper.Message, Never>()
     
     /// The url  to fetch the next page of pokemons

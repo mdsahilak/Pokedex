@@ -18,6 +18,7 @@ final class PokemonDetailViewModel: ObservableObject {
     /// Value indicating the current image shown in the carousel
     @Published var currentImageIndex: Int? = nil
     
+    /// The publisher to send drop message information to the view
     var dropPublisher = PassthroughSubject<Dropper.Message, Never>()
     
     init(pokemonLink: PokemonLink) {
