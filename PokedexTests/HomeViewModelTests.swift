@@ -30,6 +30,10 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.selectedPokemon, "Selected pokemon should be nil.")
     }
     
+    func testInitialPaginationLoaderStateIsFalse() {
+        XCTAssertFalse(viewModel.showPaginationLoader, "Pagination loader should not be shown initially.")
+    }
+    
     func testInitialSearchStateIsNotSearching() {
         XCTAssertFalse(viewModel.isSearching, "IsSearching should be false.")
     }
