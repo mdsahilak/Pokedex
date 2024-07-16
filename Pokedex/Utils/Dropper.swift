@@ -5,7 +5,7 @@
 //  Created by Sahil Ak on 06/07/2024.
 //
 
-import SwiftUI
+import UIKit
 import Drops
 
 /// Helper methods for accessible toasts to the user
