@@ -42,6 +42,21 @@ final class HomeViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.searchText.isEmpty, "SearchText should be an empty string.")
     }
     
+    func testSearchingForPokemon() async throws {
+        await viewModel.loadPokemons()
+        
+        let searchName = "charizard"
+        viewModel.searchText = searchName
+        
+        let searchResults = try XCTUnwrap(viewModel.searchedPokemons)
+        
+        XCTAssertEqual(searchResults.count, 1)
+        
+        let result = try XCTUnwrap(searchResults.first)
+        
+        XCTAssertEqual(result.name, searchName, "Search should filter out the correct pokemon.")
+    }
+    
     func testFetchingPokemonsFromAPI() async throws {
         await viewModel.loadPokemons()
         
@@ -59,20 +74,5 @@ final class HomeViewModelTests: XCTestCase {
         let expectedCount = Constants.paginationLimit * 2
         
         XCTAssertEqual(pokemonsCount, expectedCount, "Pagination call should fetch the next page of pokemons.")
-    }
-    
-    func testSearchingForPokemon() async throws {
-        await viewModel.loadPokemons()
-        
-        let searchName = "charizard"
-        viewModel.searchText = searchName
-        
-        let searchResults = try XCTUnwrap(viewModel.searchedPokemons)
-        
-        XCTAssertEqual(searchResults.count, 1)
-        
-        let result = try XCTUnwrap(searchResults.first)
-        
-        XCTAssertEqual(result.name, searchName, "Search should filter out the correct pokemon.")
     }
 }
