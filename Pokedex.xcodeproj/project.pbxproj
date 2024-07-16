@@ -119,8 +119,7 @@
 			children = (
 				BA997DF32C334CA2007C2E51 /* PokedexApp.swift */,
 				BA997E012C334D15007C2E51 /* Models */,
-				BA997E032C334D2E007C2E51 /* ViewModels */,
-				BA997E042C334D3B007C2E51 /* Views */,
+				BADF5D452C4623710096368B /* Views */,
 				BA997E062C337876007C2E51 /* Networking */,
 				BADF5D212C3882240096368B /* Utils */,
 				BADF5D2D2C3902CF0096368B /* Extensions */,
@@ -148,25 +147,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		BA997E032C334D2E007C2E51 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				BA997E0B2C349A7C007C2E51 /* HomeViewModel.swift */,
-				BA997E1C2C35BD23007C2E51 /* PokemonDetailViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		BA997E042C334D3B007C2E51 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				BA997DF52C334CA2007C2E51 /* HomeView.swift */,
-				BA997E1A2C35BC6E007C2E51 /* PokemonDetailView.swift */,
-				BADF5D202C387F650096368B /* Components */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		BA997E062C337876007C2E51 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,13 +157,13 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		BADF5D202C387F650096368B /* Components */ = {
+		BADF5D202C387F650096368B /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				BA997E0D2C349E56007C2E51 /* PokemonImageView.swift */,
 				BA997E1E2C35C548007C2E51 /* CircularLoaderView.swift */,
 			);
-			path = Components;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		BADF5D212C3882240096368B /* Utils */ = {
@@ -211,6 +191,34 @@
 				BADF5D412C461C0F0096368B /* PokemonDetailViewModelTests.swift */,
 			);
 			path = PokedexTests;
+			sourceTree = "<group>";
+		};
+		BADF5D452C4623710096368B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BADF5D462C4623930096368B /* Home */,
+				BADF5D472C46239B0096368B /* PokemonDetail */,
+				BADF5D202C387F650096368B /* Common */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BADF5D462C4623930096368B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BA997E0B2C349A7C007C2E51 /* HomeViewModel.swift */,
+				BA997DF52C334CA2007C2E51 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		BADF5D472C46239B0096368B /* PokemonDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BA997E1C2C35BD23007C2E51 /* PokemonDetailViewModel.swift */,
+				BA997E1A2C35BC6E007C2E51 /* PokemonDetailView.swift */,
+			);
+			path = PokemonDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
