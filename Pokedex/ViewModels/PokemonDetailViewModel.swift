@@ -5,7 +5,7 @@
 //  Created by Sahil Ak on 03/07/2024.
 //
 
-import SwiftUI
+import Foundation
 
 @MainActor
 final class PokemonDetailViewModel: ObservableObject {

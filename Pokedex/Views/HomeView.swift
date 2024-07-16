@@ -22,6 +22,7 @@ struct HomeView: View {
                         
                         if vm.showPaginationLoader {
                             CircularLoaderView()
+                                .animation(.default, value: vm.showPaginationLoader)
                                 .padding()
                         }
                     } else {

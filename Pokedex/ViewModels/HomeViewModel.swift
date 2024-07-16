@@ -5,7 +5,7 @@
 //  Created by Sahil Ak on 02/07/2024.
 //
 
-import SwiftUI
+import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
@@ -61,14 +61,14 @@ extension HomeViewModel {
         do {
             guard let nextPage = nextPagePath else { return }
             
-            withAnimation { showPaginationLoader = true }
+            showPaginationLoader = true
             
             let data = try await PokemonService.fetchPokemons(url: URL(string: nextPage))
             
             pokemons?.append(contentsOf: data.results)
             nextPagePath = data.next
             
-            withAnimation { showPaginationLoader = false }
+            showPaginationLoader = false
         } catch {
             print(error)
         }
