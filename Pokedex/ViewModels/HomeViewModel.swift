@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
@@ -21,6 +22,8 @@ final class HomeViewModel: ObservableObject {
     
     /// State to show / hide the loader while fetching the next page of pokemons
     @Published var showPaginationLoader: Bool = false
+    
+    var dropPublisher = PassthroughSubject<Dropper.Message, Never>()
     
     /// The url  to fetch the next page of pokemons
     private var nextPagePath: String? = nil
@@ -49,7 +52,7 @@ extension HomeViewModel {
             pokemons = data.results
             nextPagePath = data.next
         } catch {
-            Dropper.send(.error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonsError)
+            dropPublisher.send(.init(type: .error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonsError))
             pokemons = []
             
             print(error)

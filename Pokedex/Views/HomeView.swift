@@ -41,6 +41,9 @@ struct HomeView: View {
             }
         }
         .searchable(text: $vm.searchText, isPresented: $vm.isSearching, placement: .navigationBarDrawer, prompt: TextAssets.searchBarPrompt)
+        .onReceive(vm.dropPublisher, perform: { message in
+            Dropper.show(message)
+        })
         .task {
             await vm.loadPokemons()
         }
