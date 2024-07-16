@@ -10,4 +10,5 @@ import Foundation
 /// Constant values used throught the app
 enum Constants {
     static let statsMaxValue: Double = 255.0
+    static let paginationLimit: Int = 20
 }

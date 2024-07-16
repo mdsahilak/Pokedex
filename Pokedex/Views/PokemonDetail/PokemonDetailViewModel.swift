@@ -5,7 +5,8 @@
 //  Created by Sahil Ak on 03/07/2024.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 
 @MainActor
 final class PokemonDetailViewModel: ObservableObject {
@@ -16,6 +17,9 @@ final class PokemonDetailViewModel: ObservableObject {
     
     /// Value indicating the current image shown in the carousel
     @Published var currentImageIndex: Int? = nil
+    
+    /// The publisher to send drop message information to the view
+    var dropPublisher = PassthroughSubject<Dropper.Message, Never>()
     
     init(pokemonLink: PokemonLink) {
         self.pokemonLink = pokemonLink
@@ -30,7 +34,8 @@ extension PokemonDetailViewModel {
         do {
             pokemonInfo = try await PokemonService.fetchPokemonInformation(for: pokemonLink.id)
         } catch {
-            Dropper.send(.error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonDetailsError)
+            dropPublisher.send(.init(type: .error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonDetailsError))
+            
             print(error)
         }
     }

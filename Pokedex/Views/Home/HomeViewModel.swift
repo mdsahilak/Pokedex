@@ -5,7 +5,8 @@
 //  Created by Sahil Ak on 02/07/2024.
 //
 
-import SwiftUI
+import Foundation
+import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
@@ -21,6 +22,9 @@ final class HomeViewModel: ObservableObject {
     
     /// State to show / hide the loader while fetching the next page of pokemons
     @Published var showPaginationLoader: Bool = false
+    
+    /// The publisher to send drop message information to the view
+    var dropPublisher = PassthroughSubject<Dropper.Message, Never>()
     
     /// The url  to fetch the next page of pokemons
     private var nextPagePath: String? = nil
@@ -49,7 +53,7 @@ extension HomeViewModel {
             pokemons = data.results
             nextPagePath = data.next
         } catch {
-            Dropper.send(.error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonsError)
+            dropPublisher.send(.init(type: .error, title: TextAssets.errorText, subtitle: TextAssets.failedToFetchPokemonsError))
             pokemons = []
             
             print(error)
@@ -61,14 +65,14 @@ extension HomeViewModel {
         do {
             guard let nextPage = nextPagePath else { return }
             
-            withAnimation { showPaginationLoader = true }
+            showPaginationLoader = true
             
             let data = try await PokemonService.fetchPokemons(url: URL(string: nextPage))
             
             pokemons?.append(contentsOf: data.results)
             nextPagePath = data.next
             
-            withAnimation { showPaginationLoader = false }
+            showPaginationLoader = false
         } catch {
             print(error)
         }

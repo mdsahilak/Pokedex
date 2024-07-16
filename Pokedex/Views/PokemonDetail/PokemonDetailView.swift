@@ -32,6 +32,9 @@ struct PokemonDetailView: View {
                     }
                 }
                 .padding()
+                .onReceive(vm.dropPublisher, perform: { message in
+                    Dropper.show(message)
+                })
                 .task {
                     await vm.loadPokemonInformation()
                 }
