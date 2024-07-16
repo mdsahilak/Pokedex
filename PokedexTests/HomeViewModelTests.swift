@@ -12,30 +12,30 @@ import XCTest
 final class HomeViewModelTests: XCTestCase {
     private var viewModel: HomeViewModel!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         viewModel = HomeViewModel()
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() {
+        super.tearDown()
         viewModel = nil
     }
     
     func testInitialPokemonsIsNil() {
-        XCTAssertNil(viewModel.pokemons, "Pokemons is not nil")
+        XCTAssertNil(viewModel.pokemons, "Pokemons should be nil.")
     }
     
     func testInitialSelectedPokemonIsNil() {
-        XCTAssertNil(viewModel.selectedPokemon, "Selected pokemon is not nil")
+        XCTAssertNil(viewModel.selectedPokemon, "Selected pokemon should be nil.")
     }
     
     func testInitialSearchStateIsNotSearching() {
-        XCTAssertFalse(viewModel.isSearching, "IsSearching is not false")
+        XCTAssertFalse(viewModel.isSearching, "IsSearching should be false.")
     }
     
     func testInitialSearchTextIsEmpty() {
-        XCTAssertTrue(viewModel.searchText.isEmpty, "SearchText is not an empty string")
+        XCTAssertTrue(viewModel.searchText.isEmpty, "SearchText should be an empty string.")
     }
     
     func testFetchingPokemonsFromAPI() async throws {
@@ -44,7 +44,7 @@ final class HomeViewModelTests: XCTestCase {
         let pokemonsCount = try XCTUnwrap(viewModel.pokemons).count
         let expectedCount = Constants.paginationLimit
         
-        XCTAssertEqual(pokemonsCount, expectedCount, "Failed to fetch pokemons from API")
+        XCTAssertEqual(pokemonsCount, expectedCount, "API call should fetch the correct no. of pokemons.")
     }
     
     func testPaginationOfPokemonFetchesFromAPI() async throws {
@@ -54,7 +54,7 @@ final class HomeViewModelTests: XCTestCase {
         let pokemonsCount = try XCTUnwrap(viewModel.pokemons).count
         let expectedCount = Constants.paginationLimit * 2
         
-        XCTAssertEqual(pokemonsCount, expectedCount, "Failed to fetch next page of pokemons")
+        XCTAssertEqual(pokemonsCount, expectedCount, "Pagination call should fetch the next page of pokemons.")
     }
     
     func testSearchingForPokemon() async throws {
@@ -69,6 +69,6 @@ final class HomeViewModelTests: XCTestCase {
         
         let result = try XCTUnwrap(searchResults.first)
         
-        XCTAssertEqual(result.name, searchName)
+        XCTAssertEqual(result.name, searchName, "Search should filter out the correct pokemon.")
     }
 }
