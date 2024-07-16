@@ -48,7 +48,7 @@ final class HomeViewModelTests: XCTestCase {
         let searchName = "charizard"
         viewModel.searchText = searchName
         
-        let searchResults = try XCTUnwrap(viewModel.searchedPokemons)
+        let searchResults = try XCTUnwrap(viewModel.searchedPokemons, "Searched pokemons should not be nil")
         
         XCTAssertEqual(searchResults.count, 1)
         
@@ -60,7 +60,7 @@ final class HomeViewModelTests: XCTestCase {
     func testFetchingPokemonsFromAPI() async throws {
         await viewModel.loadPokemons()
         
-        let pokemonsCount = try XCTUnwrap(viewModel.pokemons).count
+        let pokemonsCount = try XCTUnwrap(viewModel.pokemons, "Pokemons should not be nil").count
         let expectedCount = Constants.paginationLimit
         
         XCTAssertEqual(pokemonsCount, expectedCount, "API call should fetch the correct no. of pokemons.")
